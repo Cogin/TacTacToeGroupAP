@@ -62,7 +62,7 @@ public class TicTacToeBoard {
             }
         }
 
-        if (board[1][3] == board[2][2] && board[2][2] == board[3][1]) {
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
             if (board[0][0] == 1) {
                 return 1;
             } else if (board[0][0] == 2) {
@@ -80,5 +80,17 @@ public class TicTacToeBoard {
         }
         //if number filled is 9, return -1 for full board, else, return 0
         return numFilled == 9 ? -1 : 0;
+    }
+
+    public static void main(String[] args) {
+        TicTacToeBoard board = new TicTacToeBoard();
+        System.out.println(board.isValidMove(1, 1));
+        System.out.println(board.getGameStatus());
+        board.makeMove(0, 0, 1);
+        board.makeMove(1, 1, 1);
+        board.makeMove(2, 2, 1);
+        System.out.println(board.isValidMove(1, 1));
+        System.out.println(board.getGameStatus());
+
     }
 }
