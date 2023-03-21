@@ -14,9 +14,11 @@ public class TicTacToeBoard {
     }
 
     public boolean isValidMove(int r, int c) {
+        //check if input is out of bounds
         if (r < 0 || r > 2 || c < 0 || c > 2) {
             return false;
         }
+        //check if space is already filled
         if (board[r][c] == 0) {
             return true;
         }
@@ -24,6 +26,7 @@ public class TicTacToeBoard {
     }
     
     public void makeMove(int r, int c, int player) {
+        
         board[r][c] = player;
     }
 
