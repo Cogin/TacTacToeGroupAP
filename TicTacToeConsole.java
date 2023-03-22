@@ -21,21 +21,27 @@ public class TicTacToeConsole {
         return players;
     }
 
-    public void Player1(int x, int y) {
+    public void Player1(int x, int y, int turn) {
         if (board.isValidMove(x, y)) {
             board.makeMove(x, y, 1);
         }
         else {
-                System.out.println("Invalid move!");
+            System.out.println("Invalid move!");
+            getPlayerMoves(turn);
+            Player1(playerMove[0], playerMove[1], turn);
+            printBoard();
         }
     }
 
-    public void Player2(int x, int y) {
+    public void Player2(int x, int y, int turn) {
         if (board.isValidMove(x, y)) {
                 board.makeMove(x, y, 2);
         }
         else {
             System.out.println("Invalid move!");
+            getPlayerMoves(turn);
+            Player2(playerMove[0], playerMove[1], turn);
+            printBoard();
         }
     }
 
@@ -52,17 +58,41 @@ public class TicTacToeConsole {
         return playerMove;
     }
 
+    public void printBoard() {
+        System.out.println("\t 0 \t\t 1 \t\t 2");
+        for (int i = 0; i < 3; i++) {
+            System.out.print(i + " \t");
+            for (int j = 0; j < 3; j++) {
+                if (board.getBoard()[i][j] == 0) {
+                    System.out.print(" * \t");
+                }
+                else if (board.getBoard()[i][j] == 1) {
+                    System.out.print(" X \t");
+                }
+                else if (board.getBoard()[i][j] == 2) {
+                    System.out.print(" O \t");
+                }
+                if (j < 2) {
+                    System.out.print("| \t");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     public void play() {
         int turn = 1;
         while (board.getGameStatus() == 0) {
+            printBoard();
             if (board.getGameStatus() == 0) {
                 getPlayerMoves(turn);
-                Player1(playerMove[0], playerMove[1]);
+                Player1(playerMove[0], playerMove[1], turn);
                 turn = 2;
             }
+            printBoard();
             if (board.getGameStatus() == 0) {
                 getPlayerMoves(turn);
-                Player2(playerMove[0], playerMove[1]);
+                Player2(playerMove[0], playerMove[1], turn);
                 turn = 1;
             }
         }
