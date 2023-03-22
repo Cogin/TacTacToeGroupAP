@@ -2,53 +2,49 @@ import java.util.Scanner;
 
 
 public class TicTacToeConsole {
-    private TicTacToeBoard board;
-    private static String[] players;
-    private int player1;
-    private int player2;
-    private String move;
-
+    private static TicTacToeBoard board;
 
     public TicTacToeConsole(TicTacToeBoard board, String turn) {
         this.board = board;
-        this.player1 = 1;
-        this.player2 = 2;
-        this.move = turn;
-        players = new String[2];
     }
-
-
-    public int getPlayer1() {
-        return player1;
-    }
-
-
-    public int getPlayer2() {
-        return player2;
-    }
-
-
-    public static String[] getPlayers() {
-        return players;
-    }
-
-
-    public String getMove() {
-
-
-        return move;
-    }
-
 
     public static void main(String[] args) {
+        TicTacToeBoard board = new TicTacToeBoard();
+        String[] players = new String[2];
         Scanner input = new Scanner(System.in);
-        System.out.println("Welcome to Tic Tac Toe!");
         System.out.println("Enter player one:");
         players[0] = input.nextLine();
         System.out.println("Enter player two:");
         players[1] = input.nextLine();
-        while () {
-           
-        }
+        int turn = 1;
+        System.out.println("Welcome to Tic Tac Toe!");
+        while (board.getGameStatus() == 0) {
+            if (turn == 1) {
+                System.out.println("Enter a row for " + players[0] + ":");
+                int row = input.nextInt();
+                System.out.println("Enter a column for " + players[0] + ":");
+                int col = input.nextInt();
+                if (board.isValidMove(row, col)) {
+                    board.makeMove(row, col, 1);
+                    turn = 0;
+                }
+                else {
+                    System.out.println("Invalid move!");
+                }
+            }
+            else {
+                System.out.println("Enter a row for " + players[1] + ":");
+                int row = input.nextInt();
+                System.out.println("Enter a column for " + players[1] + ":");
+                int col = input.nextInt();
+                if (board.isValidMove(row, col)) {
+                    board.makeMove(row, col, 2);
+                    turn = 1;
+                }
+                else {
+                    System.out.println("Invalid move!");
+                }
+            }
+        }       
     }
 }
