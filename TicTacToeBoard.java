@@ -11,8 +11,20 @@ public class TicTacToeBoard {
         return board;
     }
 
+
     public int getCellContents(int r, int c) {
         return board[r][c];
+    }
+
+    public String toString() {
+        String output = "";
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
+                output += board[r][c] + " \t";
+            }
+            output += "\n";
+        }
+        return output;
     }
 
     public boolean isValidMove(int r, int c) {
@@ -94,6 +106,6 @@ public class TicTacToeBoard {
         board.makeMove(0, 0, 1);
         System.out.println(board.getGameStatus());
         System.out.println(Arrays.deepToString(board.getBoard()));
-
+        System.out.println(board.toString());
     }
 }
