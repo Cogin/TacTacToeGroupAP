@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TicTacToeBoard {
     private int[][] board;
 
@@ -38,7 +40,7 @@ public class TicTacToeBoard {
         //checks for wins along rows & collumns
         for (int i = 0; i < 3; i++) {
             //rows
-            if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+            if ((board[i][0] == board[i][1] && board[i][1] == board[i][2]) && board[i][0] != 0) {
                 if (board[i][0] == 1) {
                     return 1;
                 } else if (board[i][0] == 2) {
@@ -46,7 +48,7 @@ public class TicTacToeBoard {
                 }
             }
             //collumns
-            if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+            if ((board[0][i] == board[1][i] && board[1][i] == board[2][i]) && board[0][i] != 0) {
                 if (board[0][i] == 1) {
                     return 1;
                 } else if (board[0][i] == 2) {
@@ -57,7 +59,7 @@ public class TicTacToeBoard {
         
 
         //first diagnal check
-        if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        if ((board[0][0] == board[1][1] && board[1][1] == board[2][2]) && board[0][0] != 0) {
             if (board[0][0] == 1) {
                 return 1;
             } else if (board[0][0] == 2) {
@@ -65,7 +67,7 @@ public class TicTacToeBoard {
             }
         }
 
-        if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != 0) {
             if (board[0][0] == 1) {
                 return 1;
             } else if (board[0][0] == 2) {
@@ -87,13 +89,11 @@ public class TicTacToeBoard {
 
     public static void main(String[] args) {
         TicTacToeBoard board = new TicTacToeBoard();
-        System.out.println(board.isValidMove(1, 1));
         System.out.println(board.getGameStatus());
+        System.out.println(Arrays.deepToString(board.getBoard()));
         board.makeMove(0, 0, 1);
-        board.makeMove(1, 1, 1);
-        board.makeMove(2, 2, 1);
-        System.out.println(board.isValidMove(1, 1));
         System.out.println(board.getGameStatus());
+        System.out.println(Arrays.deepToString(board.getBoard()));
 
     }
 }
