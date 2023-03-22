@@ -2,49 +2,76 @@ import java.util.Scanner;
 
 
 public class TicTacToeConsole {
-    private static TicTacToeBoard board;
+    private TicTacToeBoard board;
+    private String[] players;
+    private int[] playerMove;
 
-    public TicTacToeConsole(TicTacToeBoard board, String turn) {
+    public TicTacToeConsole(TicTacToeBoard board,int turn) {
         this.board = board;
+        this.players = new String[2];
+        this.playerMove = new int[2];
     }
 
-    public static void main(String[] args) {
-        TicTacToeBoard board = new TicTacToeBoard();
-        String[] players = new String[2];
+    public String[] getPlayers() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter player one:");
         players[0] = input.nextLine();
         System.out.println("Enter player two:");
         players[1] = input.nextLine();
+        return players;
+    }
+
+    public void Player1(int x, int y) {
+        if (board.isValidMove(x, y)) {
+            board.makeMove(x, y, 1);
+        }
+        else {
+                System.out.println("Invalid move!");
+        }
+    }
+
+    public void Player2(int x, int y) {
+        if (board.isValidMove(x, y)) {
+                board.makeMove(x, y, 2);
+        }
+        else {
+            System.out.println("Invalid move!");
+        }
+    }
+
+    public int[] getPlayerMoves(int turn) {
+        Scanner input = new Scanner(System.in);
+        int player = 0;
+        if (turn == 2) {
+            player = 1;
+        }
+        System.out.println("Enter a row for " + players[player] + ":");
+        playerMove[0] = input.nextInt();
+        System.out.println("Enter a column for " + players[player] + ":");
+        playerMove[1] = input.nextInt();
+        return playerMove;
+    }
+
+    public void play() {
         int turn = 1;
-        System.out.println("Welcome to Tic Tac Toe!");
         while (board.getGameStatus() == 0) {
-            if (turn == 1) {
-                System.out.println("Enter a row for " + players[0] + ":");
-                int row = input.nextInt();
-                System.out.println("Enter a column for " + players[0] + ":");
-                int col = input.nextInt();
-                if (board.isValidMove(row, col)) {
-                    board.makeMove(row, col, 1);
-                    turn = 0;
-                }
-                else {
-                    System.out.println("Invalid move!");
-                }
+            if (board.getGameStatus() == 0) {
+                getPlayerMoves(turn);
+                Player1(playerMove[0], playerMove[1]);
+                turn = 2;
             }
-            else {
-                System.out.println("Enter a row for " + players[1] + ":");
-                int row = input.nextInt();
-                System.out.println("Enter a column for " + players[1] + ":");
-                int col = input.nextInt();
-                if (board.isValidMove(row, col)) {
-                    board.makeMove(row, col, 2);
-                    turn = 1;
-                }
-                else {
-                    System.out.println("Invalid move!");
-                }
+            if (board.getGameStatus() == 0) {
+                getPlayerMoves(turn);
+                Player2(playerMove[0], playerMove[1]);
+                turn = 1;
             }
-        }       
+        }
+    }
+
+    public static void main(String[] args) {
+        TicTacToeBoard board = new TicTacToeBoard();
+        TicTacToeConsole game = new TicTacToeConsole(board,1);
+        game.getPlayers();
+        game.play();
     }
 }
