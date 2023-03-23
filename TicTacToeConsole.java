@@ -40,8 +40,8 @@ public class TicTacToeConsole {
         else {
             System.out.println("Invalid move!");
             getPlayerMoves(turn);
-            Player2(playerMove[0], playerMove[1], turn);
             printBoard();
+            Player2(playerMove[0], playerMove[1], turn);
         }
     }
 
