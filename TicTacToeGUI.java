@@ -5,11 +5,19 @@ import java.awt.event.*;
 
 public class TicTacToeGUI {
     private JFrame frame;
-    private JTextArea textArea;
+    private JLabel Label;
+    
     private TicTacToeBoard board;
     private String[] players;
     private JButton[][] buttons;
     private boolean player1Turn;
+
+    private Color LightColor = Color.decode("#9896B4");
+    
+    private Color MidColor = Color.decode("#77C4D2");
+    
+    private Color DarkColor = Color.decode("#66ced6");
+
     private String XIcon = "✖";
     private String OIcon = "◯";
 
@@ -29,6 +37,9 @@ public class TicTacToeGUI {
         gamePanel.setSize(new Dimension(600,550));
         frame.add(gamePanel);
 
+        gamePanel.setBackground(DarkColor);
+
+
         makeButtonComponents();
 
         for (int r = 0; r < buttons.length; r++) {
@@ -40,12 +51,12 @@ public class TicTacToeGUI {
         JPanel infoPanel = new JPanel();
         infoPanel.setSize(new Dimension(600, 200));
         frame.add(infoPanel, BorderLayout.SOUTH);
+        infoPanel.setBackground(DarkColor);
 
-        textArea = new JTextArea();
-        textArea.setText("X's turn");
-        textArea.setFont(new Font("Courier", Font.BOLD, 30));
-        textArea.setEditable(false);
-        frame.add(textArea, BorderLayout.SOUTH);
+        Label = new JLabel("X's turn", SwingConstants.CENTER);
+        Label.setFont(new Font("Courier", Font.BOLD, 80));
+        Label.setBackground(DarkColor);
+        frame.add(Label, BorderLayout.SOUTH);
 
         frame.pack();
         frame.setSize(700,800);
@@ -67,13 +78,13 @@ public class TicTacToeGUI {
                     if (board.isValidMove(r, c)) {
                         if (player1Turn) {
                             button.setText(XIcon);
-                            textArea.setText("O's turn");
+                            Label.setText("O's turn");
                             board.makeMove(r, c, 1);
                             player1Turn = false;
                         }
                         else {
                             button.setText(OIcon);
-                            textArea.setText("X's turn");
+                            Label.setText("X's turn");
                             board.makeMove(r, c, 2);
                             player1Turn = true;
                         }
@@ -112,7 +123,7 @@ public class TicTacToeGUI {
             }
         }
         player1Turn = true;
-        textArea.setText("X's turn");
+        Label.setText("X's turn");
     }
 
     public void exitGame() {
@@ -127,8 +138,9 @@ public class TicTacToeGUI {
                 buttons[r][c].setPreferredSize(new Dimension(200, 200));
                 buttons[r][c].setText(" ");
                 buttons[r][c].setFont(new Font("Courier", Font.BOLD,75));
-                buttons[r][c].setBackground(Color.GRAY);
+                buttons[r][c].setBackground(LightColor);
                 buttons[r][c].setFocusable(false);
+                buttons[r][c].setBorder(BorderFactory.createLineBorder(MidColor, 5));
                 buttons[r][c].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         buttonListener(e);
@@ -151,6 +163,7 @@ public class TicTacToeGUI {
     public static void main(String[] args) {
         TicTacToeBoard board = new TicTacToeBoard();
         TicTacToeGUI gui = new TicTacToeGUI(board);
+        
         gui.MakeGUI();
         //restart program
     }
