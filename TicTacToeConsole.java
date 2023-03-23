@@ -59,24 +59,26 @@ public class TicTacToeConsole {
     }
 
     public void printBoard() {
-        System.out.println("\t 0 \t\t 1 \t\t 2");
+        System.out.println("\t0 \t\t1 \t\t2");
+        System.out.println(" ------------------------------------------------");
         for (int i = 0; i < 3; i++) {
-            System.out.print(i + " \t");
+            System.out.print(i + "| \t");
             for (int j = 0; j < 3; j++) {
                 if (board.getBoard()[i][j] == 0) {
-                    System.out.print(" * \t");
+                    System.out.print("   \t");
                 }
                 else if (board.getBoard()[i][j] == 1) {
-                    System.out.print(" X \t");
+                    System.out.print("X \t");
                 }
                 else if (board.getBoard()[i][j] == 2) {
-                    System.out.print(" O \t");
+                    System.out.print("O \t");
                 }
                 if (j < 2) {
                     System.out.print("| \t");
                 }
             }
-            System.out.println();
+            System.out.println("|");
+            System.out.println(" ------------------------------------------------");
         }
     }
 
