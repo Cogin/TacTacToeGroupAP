@@ -87,13 +87,9 @@ public class TicTacToeBoard {
             }
         }
 
-        System.out.println("Checking for full board");
         int numFilled = 0;
         for (int r = 0; r < 3; r++) {
-            System.out.println("Row: " + r);
             for (int c = 0; c < 3; c++) {
-                System.out.println("Collumn: " + c);
-                System.out.println(board[r][c]);
                 if (board[r][c] != 0) {
                     numFilled++;
                 }
@@ -102,7 +98,6 @@ public class TicTacToeBoard {
         //this doesnt work because 
     
         //if number filled is 9, return -1 for full board, else, return 0
-        System.out.println(numFilled);
         return numFilled == 9 ? -1 : 0;
     }
 

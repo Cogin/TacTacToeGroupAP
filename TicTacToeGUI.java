@@ -64,8 +64,6 @@ public class TicTacToeGUI {
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 if (button == buttons[r][c]) {
-                    System.out.println(r + " " + c);
-                    System.out.println(board);
                     if (board.isValidMove(r, c)) {
                         if (player1Turn) {
                             button.setText(XIcon);
@@ -90,9 +88,9 @@ public class TicTacToeGUI {
         if (board.getGameStatus() != 0) {
             int result;
             if (board.getGameStatus() == 1) {
-                result = JOptionPane.showConfirmDialog(null, "Player 1 wins! \n Play Again?", "Game Over", JOptionPane.YES_NO_OPTION);
+                result = JOptionPane.showConfirmDialog(null, "X wins! \n Play Again?", "Game Over", JOptionPane.YES_NO_OPTION);
             } else if (board.getGameStatus() == 2) {
-                result = JOptionPane.showConfirmDialog(null, "Player 2 wins! \n Play Again?", "Game Over", JOptionPane.YES_NO_OPTION);
+                result = JOptionPane.showConfirmDialog(null, "O wins! \n Play Again?", "Game Over", JOptionPane.YES_NO_OPTION);
             } else {
                 result = JOptionPane.showConfirmDialog(null, "Tie! \n Play Again?", "Game Over", JOptionPane.YES_NO_OPTION);
             }
